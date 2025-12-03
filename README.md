@@ -9,16 +9,22 @@ Hệ thống quản lý nhà trọ - Tra cứu phòng trọ
 
 ## Cài đặt
 
-### Backend
+### Lần đầu tiên
 ```bash
 cd Backend
 npm install
-npm start
+
+cd ../Frontend
+npm install
 ```
 
-### Frontend
+### Chạy dự án
 ```bash
+# Terminal 1 - Backend
+cd Backend
+npm start
+
+# Terminal 2 - Frontend
 cd Frontend
-npm install
 npm start
 ```
