@@ -1,0 +1,96 @@
+.search-bar {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    padding: 20px 5%;
+}
+
+.search-form {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 16px 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.search-field {
+    flex: 1;
+    position: relative;
+}
+
+.search-field select,
+.search-field input {
+    width: 100%;
+    padding: 12px 16px;
+    padding-left: 40px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.search-field select:focus,
+.search-field input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.field-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-gray);
+}
+
+.price-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1.5;
+}
+
+.price-field input {
+    padding-left: 16px;
+}
+
+.price-field span {
+    color: var(--text-gray);
+}
+
+.btn-search {
+    padding: 12px 28px;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-search:hover {
+    background: var(--secondary-dark);
+}
+
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .search-field,
+    .price-field {
+        width: 100%;
+    }
+
+    .btn-search {
+        width: 100%;
+        justify-content: center;
+    }
+}

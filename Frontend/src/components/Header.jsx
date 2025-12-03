@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaUser, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
+import SearchBar from './SearchBar';
+import '../styles/Header.css';
+
+const Header = () => {
+    const { user, logout, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
+    return (
+        <div className="header-container">
+            <header className="header">
+                <Link to="/" className="logo">
+                    <img src="http://localhost:5000/images/logo.png" alt="Logo" />
+                </Link>
+
+                <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+                    <Link to="/" onClick={() => setMenuOpen(false)}>TRANG CHỦ</Link>
+                    <Link to="/phongtro" onClick={() => setMenuOpen(false)}>PHÒNG TRỌ</Link>
+                    {isAuthenticated && user?.vaiTro === 'landlord' && (
+                        <Link to="/landlord" onClick={() => setMenuOpen(false)}>QUẢN LÝ</Link>
+                    )}
+                    {!isAuthenticated && (
+                        <Link to="/landlord" onClick={() => setMenuOpen(false)}>CHỦ TRỌ</Link>
+                    )}
+                </nav>
+
+                <div className="auth-buttons">
+                    {isAuthenticated ? (
+                        <>
+                            <span className="user-name">
+                                <FaUser /> {user?.tenNguoiDung}
+                            </span>
+                            <button onClick={handleLogout} className="btn-logout">
+                                <FaSignOutAlt /> Đăng xuất
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login" className="btn-login">Đăng nhập</Link>
+                            <Link to="/register" className="btn-register">Đăng ký</Link>
+                        </>
+                    )}
+                </div>
+
+                <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+                    {menuOpen ? <FaTimes /> : <FaBars />}
+                </button>
+            </header>
+
+            <SearchBar />
+        </div>
+    );
+};
+
+export default Header;

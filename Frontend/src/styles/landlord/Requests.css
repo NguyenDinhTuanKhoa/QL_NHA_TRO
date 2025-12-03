@@ -1,0 +1,198 @@
+.requests-page .stats-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-item {
+    flex: 1;
+    padding: 20px;
+    background: white;
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-item.pending {
+    border-left: 4px solid #f59e0b;
+}
+
+.stat-item.approved {
+    border-left: 4px solid #10b981;
+}
+
+.stat-item.rejected {
+    border-left: 4px solid #ef4444;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    color: var(--text-gray);
+}
+
+.requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.request-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.request-card.pending {
+    border-left: 4px solid #f59e0b;
+}
+
+.request-card.approved {
+    border-left: 4px solid #10b981;
+}
+
+.request-card.rejected {
+    border-left: 4px solid #ef4444;
+}
+
+.request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--bg-light);
+}
+
+.status-badge .badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge.pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.badge.approved {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.badge.rejected {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.request-date {
+    color: var(--text-gray);
+    font-size: 0.85rem;
+}
+
+.request-body {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.room-info h4,
+.tenant-info h4,
+.request-note h4 {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.room-info p,
+.tenant-info p {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.request-note {
+    grid-column: 1 / -1;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.request-actions {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-light);
+}
+
+.btn-approve,
+.btn-reject,
+.btn-chat {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.btn-approve {
+    background: #10b981;
+    color: white;
+}
+
+.btn-approve:hover {
+    background: #059669;
+}
+
+.btn-reject {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-reject:hover {
+    background: #dc2626;
+}
+
+.btn-chat {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-chat:hover {
+    background: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+    .stats-row {
+        flex-direction: column;
+    }
+
+    .request-body {
+        grid-template-columns: 1fr;
+    }
+
+    .request-actions {
+        flex-wrap: wrap;
+    }
+
+    .request-actions button,
+    .request-actions a {
+        flex: 1;
+        justify-content: center;
+    }
+}
