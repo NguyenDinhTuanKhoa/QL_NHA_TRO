@@ -10,6 +10,7 @@ const authRoutes = require('./routes/auth');
 const phongtroRoutes = require('./routes/phongtro');
 const landlordRoutes = require('./routes/landlord');
 const messageRoutes = require('./routes/message');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/phongtro', phongtroRoutes);
 app.use('/api/landlord', landlordRoutes);
 app.use('/api/message', messageRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

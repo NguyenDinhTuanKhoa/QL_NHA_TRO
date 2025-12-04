@@ -67,3 +67,17 @@ export const messageAPI = {
     sendYeuCau: (data) => api.post('/message/yeucau', data),
     getMyYeuCau: () => api.get('/message/yeucau/my')
 };
+
+export const adminAPI = {
+    getStats: () => api.get('/admin/stats'),
+    getUsers: () => api.get('/admin/users'),
+    addUser: (data) => api.post('/admin/users', data),
+    updateUser: (id, data) => api.put(`/admin/users/${id}`, data),
+    updateUserStatus: (id, data) => api.patch(`/admin/users/${id}/status`, data),
+    updateUserRole: (id, data) => api.patch(`/admin/users/${id}/role`, data),
+    deleteUser: (id) => api.delete(`/admin/users/${id}`),
+    getRooms: () => api.get('/admin/rooms'),
+    updateRoomStatus: (id, data) => api.patch(`/admin/rooms/${id}/status`, data),
+    deleteRoom: (id) => api.delete(`/admin/rooms/${id}`),
+    getRequests: () => api.get('/admin/requests')
+};

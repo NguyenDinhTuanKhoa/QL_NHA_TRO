@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // Layouts
 import MainLayout from './layouts/MainLayout';
 import LandlordLayout from './layouts/LandlordLayout';
+import AdminLayout from './layouts/AdminLayout';
 
 // Public Pages
 import Home from './pages/Home';
@@ -24,6 +25,12 @@ import LandlordRooms from './pages/landlord/MyRooms';
 import AddRoom from './pages/landlord/AddRoom';
 import LandlordRequests from './pages/landlord/Requests';
 import LandlordMessages from './pages/landlord/Messages';
+
+// Admin Pages
+import AdminDashboard from './pages/admin/Dashboard';
+import AdminUsers from './pages/admin/Users';
+import AdminRooms from './pages/admin/Rooms';
+import AdminRequests from './pages/admin/Requests';
 
 // Protected Route
 import ProtectedRoute from './components/ProtectedRoute';
@@ -65,6 +72,18 @@ function App() {
                     <Route path="add-room" element={<AddRoom />} />
                     <Route path="requests" element={<LandlordRequests />} />
                     <Route path="messages" element={<LandlordMessages />} />
+                </Route>
+
+                {/* Admin Routes */}
+                <Route path="/admin" element={
+                    <ProtectedRoute roles={['admin']}>
+                        <AdminLayout />
+                    </ProtectedRoute>
+                }>
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="users" element={<AdminUsers />} />
+                    <Route path="rooms" element={<AdminRooms />} />
+                    <Route path="requests" element={<AdminRequests />} />
                 </Route>
             </Routes>
         </>
