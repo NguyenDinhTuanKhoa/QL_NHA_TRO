@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaClock, FaCheck, FaTimes, FaMapMarkerAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaClock, FaCheck, FaTimes, FaMapMarkerAlt, FaComments } from 'react-icons/fa';
 import { messageAPI } from '../../services/api';
 import '../../styles/MyRequests.css';
 
@@ -76,6 +77,11 @@ const MyRequests = () => {
                             <div className="request-status">
                                 {getStatusBadge(req.trangThai)}
                                 <small>{new Date(req.ngayYeuCau).toLocaleDateString('vi-VN')}</small>
+                                {req.maChuTro && (
+                                    <Link to={`/messages?partner=${req.maChuTro}`} className="btn-chat-landlord">
+                                        <FaComments /> Nhắn tin
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     ))}

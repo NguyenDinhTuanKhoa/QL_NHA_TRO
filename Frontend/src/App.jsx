@@ -17,6 +17,7 @@ import Register from './pages/Register';
 
 // User Pages
 import MyRequests from './pages/user/MyRequests';
+import MyRentals from './pages/user/MyRentals';
 import Messages from './pages/user/Messages';
 
 // Landlord Pages
@@ -52,6 +53,11 @@ function App() {
                     <Route path="my-requests" element={
                         <ProtectedRoute>
                             <MyRequests />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="my-rentals" element={
+                        <ProtectedRoute>
+                            <MyRentals />
                         </ProtectedRoute>
                     } />
                     <Route path="messages" element={

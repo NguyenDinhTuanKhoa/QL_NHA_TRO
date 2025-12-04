@@ -157,12 +157,16 @@ const getMyYeuCau = async (req, res) => {
         const userId = req.user.maNguoiDung;
 
         const [rows] = await pool.query(`
-            SELECT yc.*, pt.dienTich, kt.tenKhuTro, kt.diaChi, lp.giaPhong, hp.anhDaiDien
+            SELECT yc.*, pt.maPhongTro, pt.dienTich, 
+                   kt.tenKhuTro, kt.diaChi, kt.maNguoiDang as maChuTro,
+                   lp.giaPhong, hp.anhDaiDien,
+                   nd.tenNguoiDung as tenChuTro, nd.sdtNguoiDung as sdtChuTro
             FROM yeucauthue yc
             JOIN phongtro pt ON yc.maPhongTro = pt.maPhongTro
             JOIN khutro kt ON pt.maKhuTro = kt.maKhuTro
             JOIN loaiphong lp ON pt.maLoaiPhong = lp.maLoaiPhong
             LEFT JOIN hinhanhphong hp ON pt.maPhongTro = hp.maPhongTro
+            LEFT JOIN nguoidung nd ON kt.maNguoiDang = nd.maNguoiDung
             WHERE yc.maNguoiThue = ?
             ORDER BY yc.ngayYeuCau DESC
         `, [userId]);

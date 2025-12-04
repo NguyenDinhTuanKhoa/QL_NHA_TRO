@@ -35,14 +35,22 @@ const Header = () => {
 
                 <div className="auth-buttons">
                     {isAuthenticated ? (
-                        <>
+                        <div className="user-menu">
                             <span className="user-name">
                                 <FaUser /> {user?.tenNguoiDung}
                             </span>
-                            <button onClick={handleLogout} className="btn-logout">
-                                <FaSignOutAlt /> Đăng xuất
-                            </button>
-                        </>
+                            <div className="user-dropdown">
+                                <Link to="/my-requests">Yêu cầu của tôi</Link>
+                                <Link to="/my-rentals">Phòng đã thuê</Link>
+                                <Link to="/messages">Tin nhắn</Link>
+                                {user?.vaiTro === 'admin' && (
+                                    <Link to="/admin" className="admin-link">Trang Admin</Link>
+                                )}
+                                <button onClick={handleLogout} className="dropdown-logout">
+                                    <FaSignOutAlt /> Đăng xuất
+                                </button>
+                            </div>
+                        </div>
                     ) : (
                         <>
                             <Link to="/login" className="btn-login">Đăng nhập</Link>

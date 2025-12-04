@@ -201,3 +201,156 @@
         display: none;
     }
 }
+
+
+/* Header với nút thêm */
+.conv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.conv-header h3 {
+    padding: 0;
+    border: none;
+}
+
+.btn-new-chat {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.btn-new-chat:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Modal chọn người nhắn tin */
+.new-chat-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.new-chat-content {
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.new-chat-header h3 {
+    font-size: 1.1rem;
+    color: #1f2937;
+}
+
+.new-chat-header button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.new-chat-header button:hover {
+    color: #1f2937;
+}
+
+.new-chat-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.new-chat-search svg {
+    color: #9ca3af;
+}
+
+.new-chat-search input {
+    flex: 1;
+    border: none;
+    background: none;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.tenant-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.no-tenant {
+    padding: 40px 20px;
+    text-align: center;
+    color: #6b7280;
+}
+
+.tenant-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.tenant-item:hover {
+    background: #f3f4f6;
+}
+
+.tenant-avatar {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.tenant-info strong {
+    display: block;
+    color: #1f2937;
+    margin-bottom: 2px;
+}
+
+.tenant-info small {
+    color: #6b7280;
+    font-size: 0.85rem;
+}

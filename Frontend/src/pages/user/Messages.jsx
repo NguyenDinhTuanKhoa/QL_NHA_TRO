@@ -1,21 +1,99 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaPaperPlane, FaUser } from 'react-icons/fa';
-import { messageAPI } from '../../services/api';
+import { useSearchParams } from 'react-router-dom';
+import { FaPaperPlane, FaUser, FaPlus, FaTimes, FaSearch } from 'react-icons/fa';
+import { messageAPI, landlordAPI } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import '../../styles/Messages.css';
 
 const Messages = () => {
     const { user } = useAuth();
+    const [searchParams] = useSearchParams();
     const [conversations, setConversations] = useState([]);
     const [selectedPartner, setSelectedPartner] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [loading, setLoading] = useState(true);
+    const [showNewChat, setShowNewChat] = useState(false);
+    const [tenants, setTenants] = useState([]);
+    const [searchTenant, setSearchTenant] = useState('');
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
         fetchConversations();
-    }, []);
+        // Nếu là chủ trọ, lấy danh sách người thuê
+        if (user?.vaiTro === 'landlord') {
+            fetchTenants();
+        }
+    }, [user]);
+
+    // Xử lý khi có partner từ URL
+    useEffect(() => {
+        const partnerId = searchParams.get('partner');
+        if (partnerId && partnerId !== 'undefined') {
+            // Tìm trong conversations hoặc tạo mới
+            const existingConv = conversations.find(c => c.partnerId === partnerId);
+            if (existingConv) {
+                setSelectedPartner(existingConv);
+            } else {
+                // Tạo conversation mới với partner
+                loadPartnerInfo(partnerId);
+            }
+        }
+    }, [searchParams, conversations]);
+
+    const loadPartnerInfo = async (partnerId) => {
+        try {
+            const response = await messageAPI.getMessages(partnerId);
+            if (response.data.data.partner) {
+                setSelectedPartner({
+                    partnerId: response.data.data.partner.maNguoiDung,
+                    partnerName: response.data.data.partner.tenNguoiDung,
+                    partnerRole: response.data.data.partner.vaiTro
+                });
+                setMessages(response.data.data.messages || []);
+            }
+        } catch (error) {
+            console.error('Error loading partner:', error);
+        }
+    };
+
+    // Lấy danh sách người đã gửi yêu cầu thuê (cho chủ trọ)
+    const fetchTenants = async () => {
+        try {
+            const response = await landlordAPI.getYeuCau();
+            // Lọc unique người thuê
+            const uniqueTenants = [];
+            const seen = new Set();
+            response.data.data.forEach(req => {
+                if (!seen.has(req.maNguoiThue)) {
+                    seen.add(req.maNguoiThue);
+                    uniqueTenants.push({
+                        maNguoiDung: req.maNguoiThue,
+                        tenNguoiDung: req.tenNguoiDung,
+                        sdtNguoiDung: req.sdtNguoiDung
+                    });
+                }
+            });
+            setTenants(uniqueTenants);
+        } catch (error) {
+            console.error('Error fetching tenants:', error);
+        }
+    };
+
+    const startNewChat = (tenant) => {
+        setSelectedPartner({
+            partnerId: tenant.maNguoiDung,
+            partnerName: tenant.tenNguoiDung,
+            partnerRole: 'user'
+        });
+        setShowNewChat(false);
+        setSearchTenant('');
+    };
+
+    const filteredTenants = tenants.filter(t => 
+        t.tenNguoiDung.toLowerCase().includes(searchTenant.toLowerCase()) ||
+        t.sdtNguoiDung?.includes(searchTenant)
+    );
 
     useEffect(() => {
         if (selectedPartner) {
@@ -71,9 +149,56 @@ const Messages = () => {
 
     return (
         <div className="messages-page">
+            {/* Modal chọn người nhắn tin */}
+            {showNewChat && (
+                <div className="new-chat-modal">
+                    <div className="new-chat-content">
+                        <div className="new-chat-header">
+                            <h3>Chọn người nhắn tin</h3>
+                            <button onClick={() => setShowNewChat(false)}><FaTimes /></button>
+                        </div>
+                        <div className="new-chat-search">
+                            <FaSearch />
+                            <input
+                                type="text"
+                                placeholder="Tìm theo tên hoặc SĐT..."
+                                value={searchTenant}
+                                onChange={(e) => setSearchTenant(e.target.value)}
+                            />
+                        </div>
+                        <div className="tenant-list">
+                            {filteredTenants.length === 0 ? (
+                                <p className="no-tenant">Không tìm thấy người thuê</p>
+                            ) : (
+                                filteredTenants.map(tenant => (
+                                    <div 
+                                        key={tenant.maNguoiDung} 
+                                        className="tenant-item"
+                                        onClick={() => startNewChat(tenant)}
+                                    >
+                                        <div className="tenant-avatar"><FaUser /></div>
+                                        <div className="tenant-info">
+                                            <strong>{tenant.tenNguoiDung}</strong>
+                                            <small>{tenant.sdtNguoiDung}</small>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="chat-container">
                 <div className="conversations-list">
-                    <h3>Tin nhắn</h3>
+                    <div className="conv-header">
+                        <h3>Tin nhắn</h3>
+                        {user?.vaiTro === 'landlord' && (
+                            <button className="btn-new-chat" onClick={() => setShowNewChat(true)}>
+                                <FaPlus />
+                            </button>
+                        )}
+                    </div>
                     {conversations.length === 0 ? (
                         <p className="no-conv">Chưa có tin nhắn</p>
                     ) : (

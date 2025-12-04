@@ -130,51 +130,120 @@
 
 .request-actions {
     display: flex;
-    gap: 12px;
-    padding: 16px 20px;
+    gap: 16px;
+    padding: 20px 24px;
     border-top: 1px solid var(--border-color);
-    background: var(--bg-light);
+    background: linear-gradient(to right, #f8fafc, #f1f5f9);
 }
 
 .btn-approve,
 .btn-reject,
 .btn-chat {
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
-    border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    font-weight: 500;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: var(--transition);
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
 }
 
+.btn-approve,
+.btn-reject,
+.btn-chat {
+    min-width: 130px;
+}
+
+/* Hiệu ứng ripple */
+.btn-approve::before,
+.btn-reject::before,
+.btn-chat::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-approve:active::before,
+.btn-reject:active::before,
+.btn-chat:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Nút Duyệt */
 .btn-approve {
-    background: #10b981;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
 }
 
 .btn-approve:hover {
-    background: #059669;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
 }
 
+.btn-approve:active {
+    transform: translateY(-1px);
+}
+
+/* Nút Từ chối */
 .btn-reject {
-    background: #ef4444;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     color: white;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
 }
 
 .btn-reject:hover {
-    background: #dc2626;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5);
 }
 
+.btn-reject:active {
+    transform: translateY(-1px);
+}
+
+/* Nút Nhắn tin */
 .btn-chat {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     color: white;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
 }
 
 .btn-chat:hover {
-    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+}
+
+.btn-chat:active {
+    transform: translateY(-1px);
+}
+
+/* Icon trong nút */
+.btn-approve svg,
+.btn-reject svg,
+.btn-chat svg {
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+}
+
+.btn-approve:hover svg,
+.btn-reject:hover svg,
+.btn-chat:hover svg {
+    transform: scale(1.2);
 }
 
 @media (max-width: 768px) {
@@ -187,12 +256,15 @@
     }
 
     .request-actions {
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 12px;
     }
 
-    .request-actions button,
-    .request-actions a {
-        flex: 1;
-        justify-content: center;
+    .btn-approve,
+    .btn-reject,
+    .btn-chat {
+        width: 100%;
+        min-width: unset;
+        padding: 14px 20px;
     }
 }

@@ -116,3 +116,29 @@
         border-top: 1px solid var(--border-color);
     }
 }
+
+
+/* Nút nhắn tin chủ trọ */
+.btn-chat-landlord {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 12px;
+    transition: all 0.3s;
+}
+
+.btn-chat-landlord:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-chat-landlord svg {
+    font-size: 0.9rem;
+}

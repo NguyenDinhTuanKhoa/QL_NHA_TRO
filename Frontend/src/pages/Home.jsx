@@ -27,7 +27,7 @@ const Home = () => {
     return (
         <div className="home-page">
             <div className="hero-section">
-                <img src="/images/introduction_img.png" alt="Banner" className="hero-image" />
+                <img src="http://localhost:5000/images/introduction_img.png" alt="Banner" className="hero-image" />
             </div>
 
             <section className="rooms-section">
