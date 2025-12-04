@@ -1,25 +1,22 @@
-# QL_NHA_TRO
+﻿# QL_NHA_TRO
 
-Hệ thống quản lý nhà trọ - Tra cứu phòng trọ
+He thong quan ly nha tro - Tra cuu phong tro
 
-## Công nghệ sử dụng
+## Cong nghe su dung
 - Frontend: React.js
 - Backend: Node.js, Express
 - Database: MySQL
 
-## Cài đặt
+## Cai dat
 
-### Lần đầu tiên
-```bash
+### Lan dau tien
 cd Backend
 npm install
 
 cd ../Frontend
 npm install
-```
 
-### Chạy dự án
-```bash
+### Chay du an
 # Terminal 1 - Backend
 cd Backend
 npm start
@@ -27,4 +24,29 @@ npm start
 # Terminal 2 - Frontend
 cd Frontend
 npm start
-```
+
+## Tai khoan dang nhap
+
+### Tao tai khoan Admin
+Chay SQL sau trong phpMyAdmin de tao tai khoan admin:
+
+INSERT INTO nguoidung (maNguoiDung, tenNguoiDung, matKhau, tenDangNhap, sdtNguoiDung, emailNguoiDung, vaiTro, ngayDangKy) 
+VALUES ('ND99999', 'Administrator', 'admin123', 'admin', '0123456789', 'admin@gmail.com', 'admin', NOW());
+
+**Thong tin dang nhap Admin:**
+- Ten dang nhap: admin
+- Mat khau: admin123
+- Truy cap trang admin: http://localhost:3000/admin
+
+### Cac vai tro trong he thong
+| Vai tro | Mo ta | Duong dan |
+|---------|-------|-----------|
+| user | Nguoi dung thuong - Tim kiem, xem phong tro | / |
+| landlord | Chu tro - Dang tin, quan ly phong | /landlord |
+| admin | Quan tri vien - Quan ly toan bo he thong | /admin |
+
+### Chuc nang Admin
+- Thong ke tong quan (nguoi dung, phong tro, yeu cau)
+- Quan ly nguoi dung (them, sua, xoa, doi vai tro)
+- Quan ly phong tro (xem, doi trang thai, xoa)
+- Xem danh sach yeu cau thue phong
