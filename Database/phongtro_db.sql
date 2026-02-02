@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2025 at 10:32 AM
+-- Generation Time: Feb 02, 2026 at 03:42 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -89,7 +89,8 @@ INSERT INTO `hinhanhphong` (`maHinhAnh`, `maPhongTro`, `anhDaiDien`, `hinhAnh`) 
 ('HA00001', 'PT00001', '../images/phong_tro_1.jpg', '../images/phong_tro_1.jpg\r\n../images/phong_tro_2.jpg\r\n../images/phong_tro_3.jpg\r\n../images/phong_tro_4.jpg'),
 ('HA00002', 'PT00002', '../images/phong_tro_5.jpg', '../images/phong_tro_5.jpg\r\n../images/phong_tro_6.jpg\r\n../images/phong_tro_7.jpg\r\n../images/phong_tro_8.jpg'),
 ('HA00003', 'PT00004', '/uploads/room_1764774731194.jpg', '/uploads/room_1764774731194.jpg'),
-('HA00004', 'PT00005', '/uploads/room_1764837038478.jpg', '/uploads/room_1764837038478.jpg');
+('HA00004', 'PT00005', '/uploads/room_1764837038478.jpg', '/uploads/room_1764837038478.jpg'),
+('HA00005', 'PT00006', '/uploads/room_1769999958724.jpg', '/uploads/room_1769999958724.jpg');
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,8 @@ INSERT INTO `khutro` (`maKhuTro`, `tenKhuTro`, `diaChi`, `chuTro`, `sdtChuTro`, 
 ('KT00001', 'Phòng trọ bà Sáu Tây', 'Quán nhậu Cầu Lông Bình 3, Cầu Lông Bình 3, Xã Long Đức, Thành phố Trà Vinh, Trà Vinh', 'Thảo Uyên', '0559740592', '9.972942842412204, 106.33459978973937', NULL),
 ('KT00002', 'nhà. cho thuê', '  Đường Võ Văn Kiệt, Phường 1, Thành phố Trà Vinh, Trà Vinh', 'Đạt Nguyễn', '0816747257', '9.953575637185054, 106.33612417139155', NULL),
 ('KT00003', 'cho thuê phòng trọ phường 7 gần Tịnh Xá Ngọc Vân', 'Đường Nguyễn Thị Minh Khai, Phường 7, Thành phố Trà Vinh, Trà Vinh', 'Nhan', '070809****', '9.930203400304874, 106.3330390901221', NULL),
-('KT00004', 'đường D5', 'đường D5 trà vinh ', 'tuấn khoa', '123456789', '', 'ND00006');
+('KT00004', 'đường D5', 'đường D5 trà vinh ', 'tuấn khoa', '123456789', '', 'ND00006'),
+('KT00005', 'gần ký trúc xá TVU', 'dường ký trúc xá tvu ', 'Tuấn Khoa', '123456789', '', 'ND00006');
 
 -- --------------------------------------------------------
 
@@ -244,7 +246,8 @@ INSERT INTO `phongtro` (`maPhongTro`, `maKhuTro`, `maLoaiPhong`, `dienTich`, `ti
 ('PT00002', 'KT00002', 'LP00002', 80, 'empty', '2024-12-24', 'chua_dong', NULL, NULL, NULL),
 ('PT00003', 'KT00003', 'LP00003', 20, 'empty', '2024-12-29', 'da_dong', NULL, NULL, NULL),
 ('PT00004', 'KT00004', 'LP00001', 50, 'rented', '2025-12-03', 'chua_dong', '2025-12-18', NULL, NULL),
-('PT00005', 'KT00004', 'LP00003', 70, 'rented', '2025-12-04', 'da_dong', '2025-12-18', '2026-07-18', '2026-09-18');
+('PT00005', 'KT00004', 'LP00003', 70, 'rented', '2025-12-04', 'da_dong', '2025-12-18', '2026-07-18', '2026-09-18'),
+('PT00006', 'KT00005', 'LP00002', 50, 'empty', '2026-02-02', 'chua_dong', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -312,7 +315,10 @@ INSERT INTO `thongbao` (`id`, `maNguoiNhan`, `tieuDe`, `noiDung`, `loaiThongBao`
 (42, 'ND100001', 'Gia hạn thuê phòng thành công', 'Phòng Loại 3 tại đường D5 đã được gia hạn thêm 1 tháng. Thời hạn thuê mới: 18/3/2026 - 18/4/2026.', 'gia_han', 'PT00005', '2025-12-18 15:17:34', 1),
 (43, 'ND100001', 'Gia hạn thuê phòng thành công', 'Phòng Loại 3 tại đường D5 đã được gia hạn thêm 1 tháng. Thời hạn thuê mới: 18/4/2026 - 18/5/2026.', 'gia_han', 'PT00005', '2025-12-18 15:20:39', 1),
 (44, 'ND100001', 'Gia hạn thuê phòng thành công', 'Phòng Loại 3 tại đường D5 đã được gia hạn thêm 2 tháng. Thời hạn thuê mới: 18/5/2026 - 18/7/2026.', 'gia_han', 'PT00005', '2025-12-18 15:21:01', 1),
-(45, 'ND100001', 'Gia hạn thuê phòng thành công', 'Phòng Loại 3 tại đường D5 đã được gia hạn thêm 2 tháng. Thời hạn thuê mới: 18/7/2026 - 18/9/2026.', 'gia_han', 'PT00005', '2025-12-18 15:21:15', 1);
+(45, 'ND100001', 'Gia hạn thuê phòng thành công', 'Phòng Loại 3 tại đường D5 đã được gia hạn thêm 2 tháng. Thời hạn thuê mới: 18/7/2026 - 18/9/2026.', 'gia_han', 'PT00005', '2025-12-18 15:21:15', 1),
+(46, 'ND00006', 'Nhắc nhở đóng tiền phòng trọ', 'Phòng Loại 1 tại đường D5 đã quá 35 ngày chưa đóng tiền. Vui lòng cập nhật trạng thái đóng tiền.', 'dong_tien', 'PT00004', '2026-01-22 10:33:18', 0),
+(47, 'ND00006', 'Nhắc nhở đóng tiền phòng trọ', 'Phòng Loại 1 tại đường D5 đã quá 46 ngày chưa đóng tiền. Vui lòng cập nhật trạng thái đóng tiền.', 'dong_tien', 'PT00004', '2026-02-02 09:27:51', 0),
+(48, 'ND00006', 'Nhắc nhở đóng tiền phòng trọ', 'Phòng Loại 1 tại đường D5 đã quá 46 ngày chưa đóng tiền. Vui lòng cập nhật trạng thái đóng tiền.', 'dong_tien', 'PT00004', '2026-02-02 09:27:51', 0);
 
 -- --------------------------------------------------------
 
@@ -339,7 +345,8 @@ INSERT INTO `tinnhan` (`maTinNhan`, `maNguoiGui`, `maNguoiNhan`, `maPhongTro`, `
 (2, 'ND00006', 'ND100000', NULL, 'mắc đâu ọk mà ', '2025-12-04 10:47:05', 1),
 (3, 'ND00006', 'ND100000', NULL, 'không ở thì cút ra ngoài đường ở ', '2025-12-04 10:52:59', 1),
 (4, 'ND100000', 'ND00006', NULL, 'hello', '2025-12-04 13:00:02', 1),
-(5, 'ND00006', 'ND100000', NULL, 'chuyện gì?', '2025-12-04 13:59:23', 1);
+(5, 'ND00006', 'ND100000', NULL, 'chuyện gì?', '2025-12-04 13:59:23', 1),
+(6, 'ND00006', 'ND100000', NULL, 'hihi', '2026-01-22 10:41:09', 0);
 
 -- --------------------------------------------------------
 
@@ -476,13 +483,13 @@ ALTER TABLE `lichsu_giahan`
 -- AUTO_INCREMENT for table `thongbao`
 --
 ALTER TABLE `thongbao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tinnhan`
 --
 ALTER TABLE `tinnhan`
-  MODIFY `maTinNhan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `maTinNhan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `yeucauthue`
