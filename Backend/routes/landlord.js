@@ -9,11 +9,15 @@ const {
     getMyPhongTro,
     addPhongTro,
     updatePhongTroStatus,
+    updatePaymentStatus,
     deletePhongTro,
     getLoaiPhong,
     addLoaiPhong,
     getYeuCauThue,
-    updateYeuCauStatus
+    updateYeuCauStatus,
+    extendRental,
+    checkExpiredRentals,
+    sendPaymentReminder
 } = require('../controllers/landlordController');
 const { authenticateToken, checkRole } = require('../middleware/auth');
 
@@ -55,6 +59,7 @@ router.post('/khutro', landlordAuth, addKhuTro);
 router.get('/phongtro', landlordAuth, getMyPhongTro);
 router.post('/phongtro', landlordAuth, upload.array('hinhAnh', 10), addPhongTro);
 router.patch('/phongtro/:id/status', landlordAuth, updatePhongTroStatus);
+router.patch('/phongtro/:id/payment', landlordAuth, updatePaymentStatus);
 router.delete('/phongtro/:id', landlordAuth, deletePhongTro);
 
 // Loại phòng
@@ -64,5 +69,10 @@ router.post('/loaiphong', landlordAuth, addLoaiPhong);
 // Yêu cầu thuê
 router.get('/yeucau', landlordAuth, getYeuCauThue);
 router.patch('/yeucau/:id', landlordAuth, updateYeuCauStatus);
+
+// Gia hạn và kiểm tra hết hạn
+router.post('/phongtro/:id/extend', landlordAuth, extendRental);
+router.post('/check-expired', landlordAuth, checkExpiredRentals);
+router.post('/send-payment-reminder', landlordAuth, sendPaymentReminder);
 
 module.exports = router;

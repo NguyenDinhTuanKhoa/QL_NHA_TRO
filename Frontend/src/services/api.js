@@ -53,11 +53,22 @@ export const landlordAPI = {
         headers: { 'Content-Type': 'multipart/form-data' }
     }),
     updateStatus: (id, data) => api.patch(`/landlord/phongtro/${id}/status`, data),
+    updatePaymentStatus: (id, data) => api.patch(`/landlord/phongtro/${id}/payment`, data),
     deletePhongTro: (id) => api.delete(`/landlord/phongtro/${id}`),
     getLoaiPhong: () => api.get('/landlord/loaiphong'),
     addLoaiPhong: (data) => api.post('/landlord/loaiphong', data),
     getYeuCau: () => api.get('/landlord/yeucau'),
-    updateYeuCau: (id, data) => api.patch(`/landlord/yeucau/${id}`, data)
+    updateYeuCau: (id, data) => api.patch(`/landlord/yeucau/${id}`, data),
+    extendRental: (id, data) => api.post(`/landlord/phongtro/${id}/extend`, data),
+    checkExpired: () => api.post('/landlord/check-expired'),
+    sendPaymentReminder: () => api.post('/landlord/send-payment-reminder')
+};
+
+export const notificationAPI = {
+    getAll: () => api.get('/notification'),
+    markAsRead: (id) => api.patch(`/notification/${id}/read`),
+    markAllAsRead: () => api.patch('/notification/read-all'),
+    checkPayment: () => api.post('/notification/check-payment')
 };
 
 export const messageAPI = {

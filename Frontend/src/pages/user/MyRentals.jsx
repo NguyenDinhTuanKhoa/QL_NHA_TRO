@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaMapMarkerAlt, FaPhone, FaComments, FaUser, FaCalendarAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhone, FaComments, FaUser, FaCalendarAlt, FaClock, FaMoneyBillWave } from 'react-icons/fa';
 import { messageAPI } from '../../services/api';
 import '../../styles/MyRentals.css';
 
@@ -26,6 +26,32 @@ const MyRentals = () => {
     };
 
     const formatPrice = (price) => new Intl.NumberFormat('vi-VN').format(price);
+
+    const formatDate = (dateString) => {
+        if (!dateString) return 'Chưa xác định';
+        return new Date(dateString).toLocaleDateString('vi-VN');
+    };
+
+    const isExpired = (dateString) => {
+        if (!dateString) return false;
+        return new Date(dateString) < new Date();
+    };
+
+    const isSameDate = (date1, date2) => {
+        if (!date1 || !date2) return false;
+        const d1 = new Date(date1);
+        const d2 = new Date(date2);
+        return d1.toDateString() === d2.toDateString();
+    };
+
+    const getDaysUntilExpiry = (startDate, endDate) => {
+        if (!endDate) return null;
+        const start = startDate ? new Date(startDate) : new Date();
+        const end = new Date(endDate);
+        const diffTime = end - start;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays > 0 ? diffDays : 0;
+    };
 
     const getImageUrl = (imagePath) => {
         if (!imagePath) return 'http://localhost:5000/images/default_images.jpg';
@@ -58,6 +84,9 @@ const MyRentals = () => {
                             <div className="rental-image">
                                 <img src={getImageUrl(rental.anhDaiDien)} alt={rental.tenKhuTro} />
                                 <span className="rental-badge">Đang thuê</span>
+                                <span className={`payment-badge ${rental.trangThaiDongTien === 'da_dong' ? 'paid' : 'unpaid'}`}>
+                                    <FaMoneyBillWave /> {rental.trangThaiDongTien === 'da_dong' ? 'Đã đóng tiền' : 'Chưa đóng tiền'}
+                                </span>
                             </div>
                             
                             <div className="rental-content">
@@ -82,8 +111,21 @@ const MyRentals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rental-date">
-                                    <FaCalendarAlt /> Thuê từ: {new Date(rental.ngayYeuCau).toLocaleDateString('vi-VN')}
+                                <div className="rental-dates-info">
+                                    <div className="rental-date">
+                                        <FaCalendarAlt /> Thuê từ: {formatDate(rental.ngayBatDauThue)}
+                                    </div>
+                                    {rental.ngayHetHan && (
+                                        <div className={`rental-expiry ${isSameDate(rental.ngayBatDauThue, rental.ngayHetHan) || isExpired(rental.ngayHetHan) ? 'expired' : getDaysUntilExpiry(rental.ngayBatDauThue, rental.ngayHetHan) <= 7 ? 'warning' : ''}`}>
+                                            <FaClock /> 
+                                            {isSameDate(rental.ngayBatDauThue, rental.ngayHetHan)
+                                                ? `Hết hạn: ${formatDate(rental.ngayHetHan)} (còn 0 ngày)`
+                                                : isExpired(rental.ngayHetHan) 
+                                                    ? `Đã hết hạn (${formatDate(rental.ngayHetHan)})` 
+                                                    : `Hết hạn: ${formatDate(rental.ngayHetHan)} (còn ${getDaysUntilExpiry(rental.ngayBatDauThue, rental.ngayHetHan)} ngày)`
+                                            }
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="rental-actions">

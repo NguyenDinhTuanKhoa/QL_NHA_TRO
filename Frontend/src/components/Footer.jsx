@@ -15,7 +15,7 @@ const Footer = () => {
                     <h3>LIÊN HỆ</h3>
                     <p><FaMapMarkerAlt /> Đường Mậu Thân, Châu Thành, Trà Vinh</p>
                     <p><FaPhone /> 0969 707 708</p>
-                    <p><FaEnvelope /> habengialoc@gmail.com</p>
+                    <p><FaEnvelope /> kainennet2023@gmail.com</p>
                 </div>
 
                 <div className="footer-section">
@@ -30,7 +30,7 @@ const Footer = () => {
             </div>
 
             <div className="footer-bottom">
-                <p>&copy; 2024 Tra Cứu Phòng Trọ. All rights reserved.</p>
+                <p>&copy; 2025 Nhà Trọ Tân Khoa. All rights reserved.</p>
             </div>
         </footer>
     );

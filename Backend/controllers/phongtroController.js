@@ -3,7 +3,7 @@ const { pool } = require('../config/database');
 // Lấy danh sách phòng trọ
 const getAllPhongTro = async (req, res) => {
     try {
-        const { location, minPrice, maxPrice, area, page = 1, limit = 12 } = req.query;
+        const { location, maxPrice, area, status, page = 1, limit = 12 } = req.query;
         const offset = (page - 1) * limit;
 
         let sql = `
@@ -30,11 +30,7 @@ const getAllPhongTro = async (req, res) => {
             params.push(`%${location}%`);
         }
 
-        // Filter theo giá
-        if (minPrice) {
-            sql += ` AND lp.giaPhong >= ?`;
-            params.push(parseInt(minPrice));
-        }
+        // Filter theo giá (nhỏ hơn hoặc bằng)
         if (maxPrice) {
             sql += ` AND lp.giaPhong <= ?`;
             params.push(parseInt(maxPrice));
@@ -52,12 +48,18 @@ const getAllPhongTro = async (req, res) => {
             }
         }
 
+        // Filter theo trạng thái
+        if (status) {
+            sql += ` AND pt.tinhTrang = ?`;
+            params.push(status);
+        }
+
         sql += ` GROUP BY pt.maPhongTro ORDER BY pt.ngayDang DESC LIMIT ? OFFSET ?`;
         params.push(parseInt(limit), parseInt(offset));
 
         const [rows] = await pool.query(sql, params);
 
-        // Đếm tổng số
+        // Đếm tổng số với cùng điều kiện filter
         let countSql = `
             SELECT COUNT(DISTINCT pt.maPhongTro) as total
             FROM phongtro pt
@@ -65,7 +67,31 @@ const getAllPhongTro = async (req, res) => {
             JOIN loaiphong lp ON pt.maLoaiPhong = lp.maLoaiPhong
             WHERE 1=1
         `;
-        const countParams = params.slice(0, -2);
+        
+        const countParams = [];
+        if (location) {
+            countSql += ` AND kt.diaChi LIKE ?`;
+            countParams.push(`%${location}%`);
+        }
+        if (maxPrice) {
+            countSql += ` AND lp.giaPhong <= ?`;
+            countParams.push(parseInt(maxPrice));
+        }
+        if (area) {
+            const [min, max] = area.split('-');
+            if (max === undefined || area === 'above-50') {
+                countSql += ` AND pt.dienTich >= ?`;
+                countParams.push(50);
+            } else {
+                countSql += ` AND pt.dienTich >= ? AND pt.dienTich < ?`;
+                countParams.push(parseInt(min), parseInt(max));
+            }
+        }
+        if (status) {
+            countSql += ` AND pt.tinhTrang = ?`;
+            countParams.push(status);
+        }
+        
         const [countResult] = await pool.query(countSql, countParams);
 
         res.json({

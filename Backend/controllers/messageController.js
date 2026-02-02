@@ -158,8 +158,9 @@ const getMyYeuCau = async (req, res) => {
 
         const [rows] = await pool.query(`
             SELECT yc.*, pt.maPhongTro, pt.dienTich, 
+                   pt.ngayBatDauThue, pt.ngayHetHan, pt.trangThaiDongTien,
                    kt.tenKhuTro, kt.diaChi, kt.maNguoiDang as maChuTro,
-                   lp.giaPhong, hp.anhDaiDien,
+                   lp.giaPhong, lp.tenLoaiPhong, hp.anhDaiDien,
                    nd.tenNguoiDung as tenChuTro, nd.sdtNguoiDung as sdtChuTro
             FROM yeucauthue yc
             JOIN phongtro pt ON yc.maPhongTro = pt.maPhongTro

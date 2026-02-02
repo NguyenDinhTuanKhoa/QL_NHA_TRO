@@ -228,3 +228,62 @@
         flex-direction: column;
     }
 }
+
+
+/* Payment Badge */
+.payment-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.payment-badge.paid {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.payment-badge.unpaid {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+/* Rental Dates Info */
+.rental-dates-info {
+    margin-bottom: 16px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.rental-dates-info .rental-date {
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.rental-expiry {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #059669;
+    padding: 8px 12px;
+    background: #d1fae5;
+    border-radius: 6px;
+}
+
+.rental-expiry.warning {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.rental-expiry.expired {
+    background: #fee2e2;
+    color: #dc2626;
+}

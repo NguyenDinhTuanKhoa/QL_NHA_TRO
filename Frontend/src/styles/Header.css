@@ -2,6 +2,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
 }
 
 .header {
@@ -9,7 +10,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 40px;
-    height: 70px;
+    height: 100px;
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     box-shadow: var(--shadow-lg);
 }
@@ -17,7 +18,7 @@
 .logo img {
     height: 120px;
     width: auto;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .nav {
@@ -105,6 +106,11 @@
 @media (max-width: 768px) {
     .header {
         padding: 0 16px;
+        height: 70px;
+    }
+
+    .logo img {
+        height: 80px;
     }
 
     .nav {
@@ -123,7 +129,14 @@
     }
 
     .auth-buttons {
-        display: none;
+        display: flex;
+        gap: 8px;
+    }
+
+    .auth-buttons .btn-login,
+    .auth-buttons .btn-register {
+        padding: 8px 12px;
+        font-size: 0.8rem;
     }
 
     .menu-toggle {
@@ -215,6 +228,26 @@
 
 @media (max-width: 768px) {
     .user-menu {
+        display: block;
+    }
+
+    .user-menu .user-name {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .user-name-text {
         display: none;
+    }
+
+    .user-dropdown {
+        right: -50px;
+        min-width: 180px;
+    }
+}
+
+@media (min-width: 769px) {
+    .user-name-text {
+        display: inline;
     }
 }

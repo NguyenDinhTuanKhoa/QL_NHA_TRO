@@ -11,6 +11,7 @@ const phongtroRoutes = require('./routes/phongtro');
 const landlordRoutes = require('./routes/landlord');
 const messageRoutes = require('./routes/message');
 const adminRoutes = require('./routes/admin');
+const notificationRoutes = require('./routes/notification');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use('/api/phongtro', phongtroRoutes);
 app.use('/api/landlord', landlordRoutes);
 app.use('/api/message', messageRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/notification', notificationRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

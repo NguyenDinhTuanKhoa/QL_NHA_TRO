@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
-import SearchBar from './SearchBar';
+import NotificationBell from './NotificationBell';
 import '../styles/Header.css';
 
 const Header = () => {
@@ -35,10 +35,12 @@ const Header = () => {
 
                 <div className="auth-buttons">
                     {isAuthenticated ? (
-                        <div className="user-menu">
-                            <span className="user-name">
-                                <FaUser /> {user?.tenNguoiDung}
-                            </span>
+                        <>
+                            <NotificationBell />
+                            <div className="user-menu">
+                                <span className="user-name">
+                                    <FaUser /> <span className="user-name-text">{user?.tenNguoiDung}</span>
+                                </span>
                             <div className="user-dropdown">
                                 <Link to="/my-requests">Yêu cầu của tôi</Link>
                                 <Link to="/my-rentals">Phòng đã thuê</Link>
@@ -51,6 +53,7 @@ const Header = () => {
                                 </button>
                             </div>
                         </div>
+                        </>
                     ) : (
                         <>
                             <Link to="/login" className="btn-login">Đăng nhập</Link>
@@ -63,8 +66,6 @@ const Header = () => {
                     {menuOpen ? <FaTimes /> : <FaBars />}
                 </button>
             </header>
-
-            <SearchBar />
         </div>
     );
 };
